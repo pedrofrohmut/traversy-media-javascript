@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+<title>Animated Icons</title>
+<style>
+.fa {
+  font-size: 45px;
+  padding: 20px;
+}
+#chain {}
+#battery {}
+#hourglass {
+  padding: 20px 31px;
+}
+</style>
+</head>
+<body>
+<div id="chain" class="fa"></div> <!-- <i class="fas fa-unlink"></i> -->
+
+<br><br>
+
+<div id="battery" class="fa"></div>
+
+<br><br>
+
+<div id="hourglass" class="fa"></div>
+
+<script>
+// Break chain animation
+const breakChain = () => {
+  const chain = document.getElementById('chain')
+  chain.innerHTML = '&#xf0c1;'
+  setTimeout(() => {chain.innerHTML = '&#xf127;'}, 1000)
+}
+// Call animation
+breakChain()
+// Animated every 2 seconds
+setInterval(breakChain, 2000)
+
+// Battery charge animation
+const chargeBattery = () => {
+  const battery = document.getElementById('battery')
+  battery.innerHTML = '&#xf244;'
+  setTimeout(() => { battery.innerHTML = "&#xf243;" }, 1000)
+  setTimeout(() => { battery.innerHTML = "&#xf242;" }, 2000)
+  setTimeout(() => { battery.innerHTML = "&#xf241;" }, 3000)
+  setTimeout(() => { battery.innerHTML = "&#xf240;" }, 4000)
+}
+// Run animation
+chargeBattery()
+// Animated every 5 seconds
+setInterval(chargeBattery, 5000)
+
+// Hourglass tip animation
+const hourglassTip = () => {
+  const hourglass = document.getElementById('hourglass')
+  hourglass.innerHTML = "&#xf251;" //hour-glass-start
+  setTimeout(()=>{ hourglass.innerHTML = '&#xf252;' }, 1000)
+  setTimeout(()=>{ hourglass.innerHTML = '&#xf253;' }, 2000)
+}
+// Run animation
+hourglassTip()
+// Animate every 5 seconds
+setInterval(hourglassTip, 3000)
+</script>
+</body>
+</html>

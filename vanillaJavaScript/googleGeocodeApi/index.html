@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <title>Geocode App</title>
+</head>
+<body>
+<!-- https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=YOUR_API_KEY -->
+<!-- https://maps.googleapis.com/maps/api/geocode/json?latlng=40.714224,-73.961452&key=AIzaSyAeqHqOj3DPjQsGkCB87EsxSnNonHLwAcE -->
+<div class="container">
+  <h2 class="text-center">Enter location:</h2>
+  <form id="location-form">
+    <input type="text" id="location-input" class="form-control form-control-lg" autofocus>
+    <br>
+    <button type="submit" class="btn btn-primary btn-block">Submit</button>
+  </form>
+  <hr>
+  <h3>Formatted Address:</h3>
+  <div class="card-body" id="formatted-address"></div>
+  <hr>
+  <h3>Address Components:</h3>
+  <div class="card-body" id="address-components"></div>
+  <hr>
+  <h3>Geometry</h3>
+  <div class="card-body" id="geometry"></div>
+</div>
+
+<script>
+// Get location form
+const LOCATION_FORM = document.getElementById('location-form');
+
+// listen for the submit
+LOCATION_FORM.addEventListener('submit', (e) => {
+  e.preventDefault()
+  let location = document.getElementById('location-input').value
+  geocode(location)
+})
+
+let geocode = (location) => {
+  axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
+    params: {
+      address: location,
+      key:     'AIzaSyAeqHqOj3DPjQsGkCB87EsxSnNonHLwAcE'
+    }
+  })
+  .then((response) => {
+    // Log full response
+    console.log(JSON.stringify(response, null, 2))
+
+    // Formatted Address
+    let formattedAddress = response.data.results[0].formatted_address
+    let formattedAddressOutput = `
+      <ul class="list-group">
+        <li class="list-group-item">${formattedAddress}</li>
+      </ul>
+    `;
+
+    // Address components
+    let addressComponents = response.data.results[0].address_components
+    let addressComponentsOutput = '<ul class="list-group">'
+    Array.from(addressComponents).forEach((component) => {
+      addressComponentsOutput += `
+        <li class="list-group-item"><strong>${component.types[0]}:</strong>  ${component.long_name}</li>
+      `
+    })
+    addressComponentsOutput += '</ul>';
+
+    // Geometry
+    let lat = response.data.results[0].geometry.location.lat
+    let lng = response.data.results[0].geometry.location.lng
+    let geometryOutput = `
+      <ul class="list-group">
+        <li class="list-group-item"><strong>Latitude:</strong> ${lat}</li>
+        <li class="list-group-item"><strong>Longitude:</strong> ${lng}</li>
+      </ul>
+    `;
+
+    // Output App
+    document.getElementById('formatted-address').innerHTML = formattedAddressOutput
+    document.getElementById('address-components').innerHTML = addressComponentsOutput
+    document.getElementById('geometry').innerHTML = geometryOutput
+  })
+  .catch((error) => {
+    console.error(error)
+  })
+}
+</script>
+</body>
+</html>

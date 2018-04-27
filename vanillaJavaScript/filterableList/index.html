@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>My Contacts</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.css">
+</head>
+<body>
+<div class="container">
+  <h1 class="center-align">
+    My Contacts
+  </h1>
+  <input type="text" id="filter-input" placeholder="Search names">
+  <ul id="names" class="collection with-header">
+    <li class="collection-header">
+      <h5>A</h5>
+    </li>
+    <li class="collection-item">
+      <a href="#">Abe</a>
+    </li>
+    <li class="collection-item">
+      <a href="#">Adam</a>
+    </li>
+    <li class="collection-item">
+      <a href="#">Alan</a>
+    </li>
+    <li class="collection-item">
+      <a href="#">Anna</a>
+    </li>
+    <li class="collection-header">
+      <h5>B</h5>
+    </li>
+    <li class="collection-item">
+      <a href="#">Beth</a>
+    </li>
+    <li class="collection-item">
+      <a href="#">Bill</a>
+    </li>
+    <li class="collection-item">
+      <a href="#">Bob</a>
+    </li>
+    <li class="collection-item">
+      <a href="#">Brad</a>
+    </li>
+    <li class="collection-header">
+      <h5>C</h5>
+    </li>
+    <li class="collection-item">
+      <a href="#">Carrie</a>
+    </li>
+    <li class="collection-item">
+      <a href="#">Cathy</a>
+    </li>
+    <li class="collection-item">
+      <a href="#">Courtney</a>
+    </li>
+  </ul>
+</div>
+<script>
+// Get input Element
+const filterInput = document.getElementById('filter-input');
+// Get names
+const names       = document.getElementById('names');
+
+// Add event listener
+filterInput.addEventListener('keyup', (e) => {
+  // Get value input
+  let filterValue = filterInput.value.toUpperCase();
+  // Get names ul
+  let ul = names;
+  // Get lis from ul
+  let li = ul.querySelectorAll('li.collection-item');
+  // Loop throught collection-item lis
+  for (let i = 0; i < li.length; i++) {
+    let a = li[i].getElementsByTagName('a')[0];
+    // If matched
+    if (a.innerHTML.toUpperCase().indexOf(filterValue) > -1) {
+      li[i].style.display = '';
+    } else {
+      li[i].style.display = 'none';
+    }
+  }
+});
+</script>
+</body>
+</html>

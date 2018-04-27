@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<style media="screen">
+body {
+  margin-top: 70px;
+  background: #333;
+  color: #fff;
+}
+.col-md-8 > div {
+  display: none;
+  /* border: 3px solid #ccc; */
+  /* margin-bottom: 45px; */
+}
+#pounds {
+  display: block;
+}
+</style>
+<title>Weight Converter</title>
+</head>
+<body>
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 offset-md-2" id="panels-wrapper">
+      <h1 class="display-4 text-center mb-3">Weight Converter</h1>
+      <nav aria-label="...">
+        <ul class="pagination justify-content-center my-4">
+          <li class="page-item active"><a id="linkPounds" href="#" class="page-link">Pounds</a></li>
+          <li class="page-item"><a id="linkGrams" href="#" class="page-link">Grams</a></li>
+          <li class="page-item"><a id="linkKilograms" href="#" class="page-link">Kilograms</a></li>
+          <li class="page-item"><a id="linkOunces" href="#" class="page-link">Ounces</a></li>
+        </ul>
+      </nav>
+      <div id="pounds">
+        <form>
+          <div class="form-group">
+            <input id="lbsInput" type="number" class="form-control" placeholder="Enter Pounds... ">
+          </div>
+        </form><!--/form-->
+        <div id="poundsOutput" class="output">
+          <div class="card bg-primary text-white mb-2">
+            <div class="card-body">
+              <h4>Grams:</h4>
+              <div id="poundsToGramsOutput"></div>
+            </div>
+          </div><!--/.card-->
+          <div class="card bg-success text-white mb-2">
+            <div class="card-body">
+              <h4>Kilograms:</h4>
+              <div id="poundsToKgOutput"></div>
+            </div>
+          </div><!--/.card-->
+          <div class="card bg-danger text-white mb-2">
+            <div class="card-body">
+              <h4>Ounces:</h4>
+              <div id="poundsToOzOutput"></div>
+            </div>
+          </div><!--/.card-->
+        </div><!--/.output-->
+      </div><!--/#pounds-->
+      <div id="grams">
+        <form>
+          <div class="form-group">
+            <input id="gramsInput" type="number" class="form-control" placeholder="Enter Grams... ">
+          </div>
+        </form><!--/form-->
+        <div id="gramsOutput" class="output">
+          <div class="card bg-primary text-white mb-2">
+            <div class="card-body">
+              <h4>Pounds:</h4>
+              <div id="gramsToPoundsOutput"></div>
+            </div>
+          </div><!--/.card-->
+          <div class="card bg-success text-white mb-2">
+            <div class="card-body">
+              <h4>Kilograms:</h4>
+              <div id="gramsToKgOutput"></div>
+            </div>
+          </div><!--/.card-->
+          <div class="card bg-danger text-white mb-2">
+            <div class="card-body">
+              <h4>Ounces:</h4>
+              <div id="gramsToOzOutput"></div>
+            </div>
+          </div><!--/.card-->
+        </div><!--/.output-->
+      </div><!--/#grams-->
+      <div id="kilograms">
+        <form>
+          <div class="form-group">
+            <input id="kgInput" type="number" class="form-control" placeholder="Enter Kilograms... ">
+          </div>
+        </form><!--/form-->
+        <div id="kgOutput" class="output">
+          <div class="card bg-primary text-white mb-2">
+            <div class="card-body">
+              <h4>Grams:</h4>
+              <div id="kgToGramsOutput"></div>
+            </div>
+          </div><!--/.card-->
+          <div class="card bg-success text-white mb-2">
+            <div class="card-body">
+              <h4>Pounds:</h4>
+              <div id="kgToPoundsOutput"></div>
+            </div>
+          </div><!--/.card-->
+          <div class="card bg-danger text-white mb-2">
+            <div class="card-body">
+              <h4>Ounces:</h4>
+              <div id="kgToOzOutput"></div>
+            </div>
+          </div><!--/.card-->
+        </div><!--/.output-->
+      </div><!--/#kilograms-->
+      <div id="ounces">
+        <form>
+          <div class="form-group">
+            <input id="ozInput" type="number" class="form-control" placeholder="Enter Ounces... ">
+          </div>
+        </form><!--/form-->
+        <div id="ouncesOutput" class="output">
+          <div class="card bg-primary text-white mb-2">
+            <div class="card-body">
+              <h4>Grams:</h4>
+              <div id="ozToGramsOutput"></div>
+            </div>
+          </div><!--/.card-->
+          <div class="card bg-success text-white mb-2">
+            <div class="card-body">
+              <h4>Kilograms:</h4>
+              <div id="ozToKgOutput"></div>
+            </div>
+          </div><!--/.card-->
+          <div class="card bg-danger text-white mb-2">
+            <div class="card-body">
+              <h4>Pounds:</h4>
+              <div id="ozToPoundsOutput"></div>
+            </div>
+          </div><!--/.card-->
+        </div><!--/.output-->
+      </div><!--/#ounces-->
+    </div><!--/.col-md-8-->
+  </div><!--/.row-->
+</div>
+<script>
+const poundsOutput = document.getElementById('poundsOutput');
+poundsOutput.style.visibility = "hidden";
+
+const gramsOutput = document.getElementById('gramsOutput');
+gramsOutput.style.visibility = 'hidden';
+
+const kgOutput = document.getElementById('kgOutput');
+kgOutput.style.visibility = 'hidden';
+
+const ozOutput = document.getElementById('ouncesOutput');
+ozOutput.style.visibility = 'hidden';
+
+// Pounds converter
+document.getElementById('lbsInput').addEventListener('input', (e) => {
+  let pounds = e.target.value;
+  if (pounds === '') {
+    poundsOutput.style.visibility = 'hidden';
+  } else {
+    poundsOutput.style.visibility = 'visible';
+  }
+  document.getElementById('poundsToGramsOutput').innerHTML  = pounds / 0.0022046;
+  document.getElementById('poundsToKgOutput').innerHTML     = pounds / 2.2046;
+  document.getElementById('poundsToOzOutput').innerHTML     = pounds * 16;
+});
+
+// Grams converter
+document.getElementById('gramsInput').addEventListener('input', (e) => {
+  let grams = e.target.value;
+  if (grams === '') {
+    gramsOutput.style.visibility = 'hidden';
+  } else {
+    gramsOutput.style.visibility = 'visible';
+  }
+  document.getElementById('gramsToPoundsOutput').innerHTML = grams * 0.00220462;
+  document.getElementById('gramsToKgOutput').innerHTML     = grams / 1000;
+  document.getElementById('gramsToOzOutput').innerHTML     = grams * 0.035274;
+});
+
+// Kilograms converter
+document.getElementById('kgInput').addEventListener('input', (e) => {
+  let kg = e.target.value;
+  if (kg === '') {
+    kgOutput.style.visibility = 'hidden';
+  } else {
+    kgOutput.style.visibility = 'visible';
+  }
+  document.getElementById('kgToGramsOutput').innerHTML   = kg * 1000;
+  document.getElementById('kgToPoundsOutput').innerHTML  = kg * 2.20462;
+  document.getElementById('kgToOzOutput').innerHTML      = kg * 35.274;
+});
+
+// Ounces converter
+document.getElementById('ozInput').addEventListener('input', (e) => {
+  let oz = e.target.value;
+  if (oz === '') {
+    ozOutput.style.visibility  = 'hidden';
+  } else {
+    ozOutput.style.visibility  = 'visible';
+  }
+  document.getElementById('ozToGramsOutput').innerHTML  = oz * 28.3495;
+  document.getElementById('ozToKgOutput').innerHTML     = oz * 0.0283495;
+  document.getElementById('ozToPoundsOutput').innerHTML = oz * 0.0625;
+});
+
+document.getElementById('linkPounds').addEventListener('click', (e) => {
+  e.preventDefault();
+  const ul = e.target.parentElement.parentElement;
+  // Hide the active class
+  Array.from(ul.children).forEach((item) => { item.classList.remove('active') });
+  // update the active li to this
+  const thisLi = e.target.parentElement;
+  thisLi.classList.add('active');
+
+  // get the panels to hide all
+  let panels = document.querySelectorAll('#panels-wrapper > div');
+  Array.from(panels).forEach((item) => { item.style.display = 'none' });
+  // show only this panel
+  document.getElementById('pounds').style.display = 'block';
+})
+
+document.getElementById('linkGrams').addEventListener('click', (e) => {
+  e.preventDefault();
+  const ul = e.target.parentElement.parentElement;
+  // Hide the active class
+  Array.from(ul.children).forEach((item) => { item.classList.remove('active') });
+  // update the active li to this
+  const thisLi = e.target.parentElement;
+  thisLi.classList.add('active');
+
+  // get the panels to hide all
+  let panels = document.querySelectorAll('#panels-wrapper > div');
+  Array.from(panels).forEach((item) => { item.style.display = 'none' });
+  // show only this panel
+  document.getElementById('grams').style.display = 'block';
+})
+
+document.getElementById('linkKilograms').addEventListener('click', (e) => {
+  e.preventDefault();
+  const ul = e.target.parentElement.parentElement;
+  // Hide the active class
+  Array.from(ul.children).forEach((item) => { item.classList.remove('active') });
+  // update the active li to this
+  const thisLi = e.target.parentElement;
+  thisLi.classList.add('active');
+
+  // get the panels to hide all
+  let panels = document.querySelectorAll('#panels-wrapper > div');
+  Array.from(panels).forEach((item) => { item.style.display = 'none' });
+  // show only this panel
+  document.getElementById('kilograms').style.display = 'block';
+})
+
+document.getElementById('linkOunces').addEventListener('click', (e) => {
+  e.preventDefault();
+  const ul = e.target.parentElement.parentElement;
+  // Hide the active class
+  Array.from(ul.children).forEach((item) => { item.classList.remove('active') });
+  // update the active li to this
+  const thisLi = e.target.parentElement;
+  thisLi.classList.add('active');
+
+  // get the panels to hide all
+  let panels = document.querySelectorAll('#panels-wrapper > div');
+  Array.from(panels).forEach((item) => { item.style.display = 'none' });
+  // show only this panel
+  document.getElementById('ounces').style.display = 'block';
+})
+</script>
+</body>
+</html>

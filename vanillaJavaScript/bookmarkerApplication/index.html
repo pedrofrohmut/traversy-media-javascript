@@ -1,0 +1,55 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Site Bookmarker</title>
+  <!-- Bootstrap core CSS -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body onload="fetchBookmarks()">
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="#">Bookmarker</a>
+  </div>
+</nav>
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>Bookmark your Favorites Sites</h1>
+    <form id="myForm">
+      <div class="form-group">
+        <label>Site Name</label>
+        <input type="text" class="form-control" id="siteName" placeholder="Website Name">
+      </div>
+      <div class="form-group">
+        <label>Site URL</label>
+        <input type="text" class="form-control" id="siteUrl" placeholder="Website URL">
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+</div>
+
+<div class="container">
+  <!-- Example row of columns -->
+  <div class="row">
+    <div class="col-md-12">
+      <div id="bookmarksResults"></div>
+    </div>
+  </div>
+  <hr>
+  <footer>
+    <p>&copy; 2016 Bookmarker, Inc.</p>
+  </footer>
+</div> <!-- /container -->
+
+<!-- Bootstrap core JavaScript -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/main.js" charset="utf-8"></script>
+  </body>
+</html>

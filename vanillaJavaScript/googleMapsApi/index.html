@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+<style>
+#map {
+  height: 400px;
+  width: 100%;
+}
+</style>
+  <title>GoogleMaps API</title>
+</head>
+<body>
+<h1>My Google Map</h1>
+<div id="map"></div>
+<script>
+var initMap = () => {
+  let options = {
+    zoom: 8,
+    center: {
+      lat:42.3601,
+      lng:-71.0589
+    }
+  }
+  // New map
+  let map = new google.maps.Map(document.getElementById('map'), options)
+  // Listen for click on map and create a Marker
+  google.maps.event.addListener(map, 'click', event => addMarker({coords:event.latLng}))
+  let markers = [
+    {
+      coords: {
+        lat:42.4668,
+        lng:-70.9495
+      },
+      iconImage: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
+      content: '<h1>Boston MA</h1>'
+    },
+    {
+      coords: {
+        lat:42.8584,
+        lng:-70.9300
+      },
+      content: '<h1>Amesbury MA</h1>'
+    },
+    {
+      coords:{
+        lat:42.7762,
+        lng:-71.0773
+      }
+    }
+  ]
+  // Loop throught markers
+  markers.forEach(marker => addMarker(marker))
+  // Add marker function
+  function addMarker(props) {
+    var marker = new google.maps.Marker({
+      // Must have props
+      position: props.coords,
+      map: map
+    })
+    // Check for custom icon
+    if (props.iconImage) marker.setIcon(props.iconImage) // Set icon image
+    // Check content
+    if (props.content)
+      marker.addListener('click', e => {
+        new google.maps.InfoWindow({ content: props.content })
+          .open(map, marker)
+      })
+  }
+}
+</script>
+<script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAeqHqOj3DPjQsGkCB87EsxSnNonHLwAcE&callback=initMap">
+</script>
+</body>
+</html>

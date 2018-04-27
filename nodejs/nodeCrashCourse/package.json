@@ -1,0 +1,11 @@
+{
+  "name": "myapp",
+  "version": "1.0.0",
+  "description": "Simple Test App",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Pedro Frohmut",
+  "license": "ISC"
+}

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<style>
+.slide {
+  margin: 10px;
+  opacity: 0.6;
+}
+.shadowed {
+  box-shadow: 2px 2px 5px 3px #888;
+  opacity: unset;
+}
+</style>
+<title>Simple Slideshow</title>
+</head>
+<body>
+<img src="" alt="" id="slide" class="slide">
+<script>
+const slide = document.getElementById('slide')
+
+let i = 0 // start point
+const time = 1300
+const images = [
+  "img/destaque-home1.png",
+  "img/destaque-home2.png",
+  "img/destaque-home3.jpg",
+  "img/destaque-home4.jpg",
+  "img/destaque-home5.jpg",
+  "img/destaque-home6.jpg",
+  "img/destaque-home7.jpg",
+  "img/destaque-home8.jpg"
+]
+
+const changeImg = () => {
+  console.log('changeImg')
+  slide.src = images[i]
+
+  if ( i < images.length - 1 ) {
+    i++
+  } else {
+    i = 0
+  }
+}
+
+let imgInterval = setInterval(changeImg, time)
+
+document.addEventListener("DOMContentLoaded", changeImg)
+
+slide.addEventListener("mouseover", (e) => {
+  slide.classList.add('shadowed')
+  clearInterval(imgInterval)
+})
+slide.addEventListener("mouseleave", (e) => {
+  slide.classList.remove('shadowed')
+  changeImg()
+  imgInterval = setInterval(changeImg, time)
+})
+</script>
+</body>
+</html>

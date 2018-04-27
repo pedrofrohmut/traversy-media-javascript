@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<style>
+body {
+  padding: 20px 0;
+}
+.btn {
+  width: 170px;
+}
+</style>
+<title>Fetch API Sandbox</title>
+</head>
+<body>
+<div class="container">
+  <h1 class="display-4 mb-4">Fetch API Sandbox</h1><br>
+  <div class="d-flex">
+    <button id="getText" class="btn btn-primary mr-4">Get Text</button>
+    <button id="getUsers" class="btn btn-success mr-4">Get JSON Users</button>
+    <button id="getPosts" class="btn btn-warning mr-4">Get Posts API DATA</button>
+    <button id="hideAndShow" class="btn btn-secondary btn-sm">Hide/Show</button>
+  </div>
+  <hr>
+  <div id="output"></div>
+  <hr>
+  <form id="addPost">
+    <h2>Add Post</h2>
+    <div class="form-group">
+      <input type="text" id="title" class="form-control" placeholder="Post Title">
+    </div>
+    <div class="form-group">
+      <textarea id="body" class="form-control" name="name" rows="8" cols="80" placeholder="Post Body"></textarea>
+    </div>
+    <input type="submit" value="Submit" class="btn btn-primary">
+  </form>
+</div>
+<script>
+const output = document.getElementById('output');
+document.getElementById('getText').addEventListener('click', (e) => {
+  getText()
+})
+document.getElementById('getUsers').addEventListener('click', (e) => {
+  getUsers()
+})
+document.getElementById('getPosts').addEventListener('click', (e) => {
+  getPosts()
+})
+document.getElementById('addPost').addEventListener('submit', (e) => {
+  e.preventDefault()
+  addPost()
+})
+document.getElementById('hideAndShow').addEventListener('click', (e) => {
+  toogle(output)
+})
+let getText = () => {
+  // returns a promise
+  // fetch('sample.txt')
+  //   .then(function(response) {
+  //     return response.text()
+  //   })
+  //   .then(function(data) {
+  //     console.log(data)
+  //   })
+  //   .catch((error) => {
+  //     console.error("Error: ", error)
+  //   })
+  fetch('sample.txt') // Returns a promise
+    .then(response => response.text())
+    .then(data     => {
+      document.getElementById('output').innerHTML = data
+    })
+    .catch(error   => console.error(error))
+  show(output)
+}
+
+let getUsers = () => {
+  fetch('users.json') // Returns a promise
+    .then(response => response.json())
+    .then(data     => {
+      let output = '<h2 class="mb-4">Users: </h2>'
+      data.forEach(user =>
+        output +=
+          `<ul class="list-group mb-3">
+            <li class="list-group-item"><strong>Id:</strong> ${user.id}</li>
+            <li class="list-group-item"><strong>Name:</strong> ${user.name}</li>
+            <li class="list-group-item"><strong>E-mail:</strong> ${user.email}</li>
+          </ul>`
+      )
+      document.getElementById('output').innerHTML = output
+    })
+  show(output)
+}
+let getPosts = () => {
+  fetch('http://jsonplaceholder.typicode.com/posts') // resturns a promise
+    .then(response => response.json())
+    .then(data     => {
+      let output = '<h2 class="mb-4">Posts: </h2>'
+      data.forEach(post =>
+        output +=
+          `<div class="card card-body mb-3">
+            <h3>${post.title}</h3>
+            <p>${post.body}</p>
+          </div>`
+      )
+      document.getElementById('output').innerHTML = output
+    })
+  show(output)
+}
+let addPost = () => {
+  let title = document.getElementById('title').value
+  let body  = document.getElementById('body').value
+  fetch('http://jsonplaceholder.typicode.com/posts', {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json, text/plain, */*',
+      'Content-type': 'application/json'
+    },
+    body: JSON.stringify({
+      title: title,
+      body: body
+    })
+  })
+  .then(res  => res.json())
+  .then(data => console.log(data))
+  // show(output)
+}
+let toogle = (elem) => {
+  if (window.getComputedStyle(elem).display === 'block') {
+    hide(elem)
+  } else {
+    show(elem)
+  }
+}
+let show = (elem) => {
+  elem.style.display = 'block'
+}
+let hide = (elem) => {
+  elem.style.display = 'none'
+}
+</script>
+</body>
+</html>
