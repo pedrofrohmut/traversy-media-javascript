@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<!-- BOOTSTRAP -->
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+<title>Finddit</title>
+</head>
+<body>
+<nav class="navbar navbar-dark bg-primary mb-3">
+    <div class="container">
+        <span class="navbar-brand">Finddit</span>
+    </div>
+</nav>
+<main id="search-container" class="container">
+    <div id="search" class="card card-body bg-light mb-2">
+        <h4>Search Reddit</h4>
+        <form id="search-form">
+            <div class="form-group">
+                <input type="text" id="search-input" class="form-control mb-3" placeholder="Search Term...">
+            </div>
+            <!-- SORT BY: REVELANCE -->
+            <div class="form-check form-check-inline">
+                Sort By:
+                <input class="form-check-input ml-2" type="radio" name="sortby" value="relevance" checked>
+                <label class="form-check-label">
+                Relevance
+                </label>
+            </div>
+            <!-- SORT BY: NEW -->
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="sortby" value="new">
+                <label class="form-check-label">
+                Latest
+                </label>
+            </div>
+            <!-- SORT BY: HOT -->
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="sortby" value="hot">
+                <label class="form-check-label">
+                HOT
+                </label>
+            </div>
+            <!-- SORT BY: TOP -->
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="sortby" value="top">
+                <label class="form-check-label">
+                TOP
+                </label>
+            </div>
+            <!-- SORT BY: COMMENTS -->
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="sortby" value="comments">
+                <label class="form-check-label">
+                Comments
+                </label>
+            </div>
+            <h5 class="mt-2">Limit: </h5>
+            <div class="form-group">
+                <select name="limit" id="limit" class="form-control">
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="25" selected>25</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-dark btn-block mt-4">Search</button>
+        </form>
+    </div><!--/.search-->
+    <div id="results"></div>
+</main><!--/.container-->
+<script src="index.js"></script>
+</body>
+</html>
