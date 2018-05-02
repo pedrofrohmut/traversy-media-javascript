@@ -1,0 +1,35 @@
+body {
+    margin: 20px;
+    padding: 0;
+    background: #333;
+}
+
+main.container {
+    max-width: 760px;
+    margin: auto;
+    border: 3px solid #333;
+    background: #333;
+}
+
+div.main-img img,
+div.imgs img {
+    width: 100%;
+}
+
+.imgs {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 5px;
+}
+
+/* Fade In Animation */     
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+.fade-in {
+    opacity: 0;
+    animation: fadeIn 0.5s ease-in 1 forwards;
+}
