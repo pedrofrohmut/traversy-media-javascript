@@ -1,0 +1,94 @@
+* {
+    box-sizing: border-box; /* Any padding, border or margin doesnt add to the height and width */
+}
+html, 
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #fff;
+    background-color: #333;
+    overflow: hidden; /* Makes that you cant scroll */
+}
+.landing {
+    position: relative; /* To parent the inner elements with "position: absolute"  */
+    background-image: url("../img/background.jpg");
+    background-size: cover; /* Covers completely the content (sometimes can hide some parts of the image so it can cover both height and width) */
+    background-position: center;
+    height: 100vh; /* Relative height to 100% of the visible viewport device (1vh === 1% viewport height device) */
+}
+.landing-inner {
+    position: absolute;
+    top: 0; /*px*/
+    left: 0; /*px*/
+    width: 100%;
+    height: 100%;
+    background: #00000099;
+    text-align: center;
+    padding: 3.2em; /*em*/
+}
+.landing p {
+    font-size: 1.3rem; /*rem*/
+}
+.landing h1 {
+    font-size: 3.2rem; /*rem*/
+}
+.countdown {
+    font-size: 2.5rem; /*rem*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.countdown div {
+    padding: 0.5em;
+    border: 1px solid #fff;
+    border-radius: 0.3em;
+    margin: 0.12em;
+    background-color: #00000099;
+}
+.countdown div:first-child {
+    background-color: #17a2b899;
+}
+.countdown span {
+    display: block;
+    font-size: 1.6rem;
+}
+
+@media (max-width: 650px) {
+    .landing img {
+        width: 70%; /* resize logo in small screens */
+    }
+    .landing p {
+        font-size: 1.2rem;
+    }
+    .landing h1 {
+        font-size: 2.0rem;
+    }
+    .countdown {
+        font-size: 1.5rem;
+        flex-direction: column;
+    }
+    .countdown span {
+        font-size: 1.4rem;
+    }
+    .countdown div {
+        display: none;
+    }
+    .countdown div:first-child {
+        display: block;
+        width: 80%;
+    }
+}
+@media (max-height: 600px) {
+    .landing img {
+        width: 20%;
+    }
+    .landing p {
+        display: none;
+    }
+}
+@media (max-height: 400px) {
+    .landing h1 {
+        display: none;
+    }
+}
